@@ -14,8 +14,8 @@
         <testng.version>6.8.17</testng.version>
         <selenium.version>2.53.1</selenium.version>
         <compiler.version>1.8</compiler.version>
+        <selenide.version>2.20</selenide.version>
     </properties>
-
 
     <build>
         <plugins>
@@ -56,6 +56,11 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-chrome-driver</artifactId>
             <version>${selenium.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>${selenide.version}</version>
         </dependency>
     </dependencies>
 </project>
