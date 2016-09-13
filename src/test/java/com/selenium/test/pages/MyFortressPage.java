@@ -79,7 +79,11 @@ public class MyFortressPage extends BasePage {
 
             }
         });
-        TimeUtils.waitForSecondsTread(30);
+
+        do {
+            TimeUtils.waitForSecondsTread(10);
+        } while (getPDstatus(pdName).equals("Waiting..."));
+
     }
 
     public String getPDstatus(String pdName) {

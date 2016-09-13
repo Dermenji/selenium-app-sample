@@ -54,17 +54,17 @@ public class FRDPage extends BasePage {
     @FindBy(id = "pin")
     private WebElement registrationCode;
 
-    @FindBy(xpath= ".//*/td[contains (text(), 'registration code')]/../td[2]")
+    @FindBy(xpath = ".//*/td[contains (text(), 'registration code')]/../td[2]")
     private WebElement registrationCodeSettings;
 
-	@FindBy(id = "mask")
-	private WebElement mask;
+    @FindBy(id = "mask")
+    private WebElement mask;
 
-	@FindBy(id = "kbd-input")
-	private WebElement kbdInput;
+    @FindBy(id = "kbd-input")
+    private WebElement kbdInput;
 
-	@FindBy(id = "unlock")
-	private WebElement unlock;
+    @FindBy(id = "unlock")
+    private WebElement unlock;
 
 
     public FRDPage() {
@@ -136,7 +136,7 @@ public class FRDPage extends BasePage {
 
     private void lockOn() {
         TimeUtils.waitForSecondsTread(5);
-        if (mask.isDisplayed()){
+        if (mask.isDisplayed()) {
             mask.click();
             kbdInput.sendKeys("1111");
             unlock.click();
