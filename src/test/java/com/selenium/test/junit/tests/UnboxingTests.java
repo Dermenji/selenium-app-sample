@@ -42,7 +42,7 @@ public class UnboxingTests {
 
     @Test
     public void A_testFactoryReset() {
-        mainPage.goToMyFortressPage();
+        myFortressPage.openPage();
         myFortressPage.factoryReset();
         mainPage.openNewTab("http://192.168.66.228:8081");
         assertTrue("Unboxing is not started", frdPage.isUnboxingPageOpened());

@@ -10,6 +10,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 public class MainPage extends BasePage {
 
@@ -18,11 +19,12 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//*[@id='page-wrapper']/div[1]/div/nav/ul/li[2]/a")
     private WebElement loginButton;
 
+    @FindBy(id = "page-wrapper")
+    private WebElement mainLabel;
+
     @FindBy(xpath = ".//*[@id='page-wrapper']/div[1]/div/nav/ul/li[2]/ul/li[1]/a")
     private WebElement signOut;
 
-    @FindBy(xpath = ".//*[@id='side-menu']/li[2]/ul/li[2]/a")
-    private WebElement myFortress;
 
     @FindBy(xpath = ".//*[@id='side-menu']/li[2]/ul/li[1]/a")
     private WebElement dashBoard;
@@ -39,7 +41,11 @@ public class MainPage extends BasePage {
 
     @Override
     public boolean isPageOpened() {
-        return loginButton.isDisplayed();
+        try {
+            return mainLabel.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 
     public void goToLoginPage() {
@@ -51,16 +57,6 @@ public class MainPage extends BasePage {
         loginButton.click();
         TimeUtils.waitForSeconds(1);
         signOut.click();
-        TimeUtils.waitForPageLoaded();
-    }
-
-    public void goToMyFortressPage() {
-        myFortress.click();
-        TimeUtils.waitForPageLoaded();
-    }
-
-    public void goToDashBoardPage() {
-        dashBoard.click();
         TimeUtils.waitForPageLoaded();
     }
 

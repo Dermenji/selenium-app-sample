@@ -25,11 +25,10 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/form/span")
     private WebElement errorMessage;
 
-    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/form/a")
-    private WebElement createAccountButton;
+
 
     public LoginPage() {
-        super(true);
+        super(false);
     }
 
     @Override
@@ -57,7 +56,5 @@ public class LoginPage extends BasePage {
         return errorMessage.getText();
     }
 
-    public void goToRegistrationPage() {
-        createAccountButton.click();
-    }
+
 }

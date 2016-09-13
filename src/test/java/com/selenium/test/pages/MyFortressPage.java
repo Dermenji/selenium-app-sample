@@ -24,9 +24,6 @@ public class MyFortressPage extends BasePage {
     @FindBy(xpath = "html/body/div[4]/div/div/div/div[3]/button[1]")
     private WebElement modalWindowRestart;
 
-    @FindBy(xpath = ".//*[@id='side-menu']/li[2]/ul/li[5]/a")
-    private WebElement associationPage;
-
     @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/div/div/div/div/form/div/input")
     private WebElement registrationInput;
 
@@ -36,14 +33,18 @@ public class MyFortressPage extends BasePage {
     @FindBys(@FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div[1]/div/div/div[2]/table/tbody/tr[2]/td/div/table/tbody/tr"))
     private List<WebElement> rowCollection;
 
+    @FindBy(xpath = ".//*[@id='side-menu']//a[contains (text(), 'My Fortress')]")
+    private WebElement myFortress;
+
 
     public MyFortressPage() {
-        super(true);
+        super(false);
     }
 
     @Override
-    protected void openPage() {
-        //do nothing
+    public void openPage() {
+        myFortress.click();
+        TimeUtils.waitForPageLoaded();
     }
 
     @Override

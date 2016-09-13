@@ -12,30 +12,30 @@ import java.util.NoSuchElementException;
 
 public class AssociationPage extends BasePage {
 
-    @FindBy(xpath = ".//*[@id='side-menu']/li[2]/ul/li[5]/a")
+    @FindBy(xpath = ".//*[@id='side-menu']//a[contains(text(), 'Associate Fortress device')]")
     private WebElement associationPage;
 
-    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/div/div/div/div/form/div/input")
+    @FindBy(xpath = ".//*[@id='page-wrapper']//input")
     private WebElement registrationInput;
 
-    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/div/div/div/div/form/button")
+    @FindBy(xpath = ".//*[@id='page-wrapper']//button")
     private WebElement registrationButton;
 
 
     public AssociationPage() {
-        super(true);
+        super(false);
     }
 
     @Override
     protected void openPage() {
-        //do nothing
+        associationPage.click();
+        TimeUtils.waitForPageLoaded();
     }
 
     @Override
     public boolean isPageOpened() {
         try {
-            WebElement con = getDriver().findElement(By.xpath(".//*[@id='page-wrapper']/div[2]/div/div/div/div/div/div/form/div/input"));
-            return con.isDisplayed();
+            return registrationInput.isDisplayed();
         } catch (NoSuchElementException e) {
             return false;
         }

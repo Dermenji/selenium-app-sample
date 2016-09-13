@@ -56,7 +56,7 @@ public class FRDPage extends BasePage {
 
 
     public FRDPage() {
-        super(true);
+        super(false);
     }
 
     @Override

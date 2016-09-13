@@ -2,10 +2,7 @@ package com.selenium.test.junit.tests;
 
 import com.selenium.test.configuration.TestsConfig;
 import com.selenium.test.junit.rules.ScreenShotOnFailRule;
-import com.selenium.test.pages.DashboardPage;
-import com.selenium.test.pages.LoginPage;
-import com.selenium.test.pages.MainPage;
-import com.selenium.test.pages.MyFortressPage;
+import com.selenium.test.pages.*;
 import com.selenium.test.utils.TimeUtils;
 import com.selenium.test.webtestsbase.WebDriverFactory;
 import org.junit.Before;
@@ -16,6 +13,7 @@ import org.junit.runners.MethodSorters;
 
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -26,6 +24,8 @@ public class MyFortressTests {
     LoginPage loginPage;
     DashboardPage dashboardPage;
     MyFortressPage myFortressPage;
+    AssociatedUsersPage associatedUsersPage;
+    AssociationPage associationPage;
 
     @Rule
     public ScreenShotOnFailRule screenShotOnFailRule = new ScreenShotOnFailRule();
@@ -37,15 +37,17 @@ public class MyFortressTests {
         loginPage = new LoginPage();
         dashboardPage = new DashboardPage();
         myFortressPage = new MyFortressPage();
+        associationPage = new AssociationPage();
+        associatedUsersPage = new AssociatedUsersPage();
         mainPage.goToLoginPage();
         loginPage.login(TestsConfig.getConfig().getUsername(), TestsConfig.getConfig().getPassword());
     }
 
     @Test
     public void A_testFRDRestart() {
-        mainPage.goToMyFortressPage();
+        myFortressPage.openPage();
         myFortressPage.restartDevice();
-        mainPage.goToDashBoardPage();
+        dashboardPage.openPage();
         assertEquals("Disconnected", dashboardPage.getFRDStatus());
         do {
             TimeUtils.waitForSeconds(10);
@@ -55,16 +57,25 @@ public class MyFortressTests {
 
     @Test
     public void B_testBlockPD() {
-        mainPage.goToMyFortressPage();
+        myFortressPage.openPage();
         myFortressPage.pdDoAction("maria", "Disallow");
         assertEquals("Connected Blocked", myFortressPage.getPDstatus("maria"));
     }
 
     @Test
     public void C_testUnBlockPD() {
-        mainPage.goToMyFortressPage();
+        myFortressPage.openPage();
         myFortressPage.pdDoAction("maria", "Allow");
         assertEquals("Connected", myFortressPage.getPDstatus("maria"));
+    }
+
+    @Test
+    public void D_testDeleteAssosiatedFRDWithUser() {
+        associatedUsersPage.openPage();
+        associatedUsersPage.removeUser();
+        dashboardPage.openPage();
+        assertTrue("Assotion page is not loaded", associationPage.isPageOpened());
+
     }
 
     // @Test
@@ -72,10 +83,7 @@ public class MyFortressTests {
 
     }
 
-    // @Test
-    public void testDeleteAssosiatedFRDWithUser() {
 
-    }
 
     // @Test
     public void testUpdateFRDDetails() {

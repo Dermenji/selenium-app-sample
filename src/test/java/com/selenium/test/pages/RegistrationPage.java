@@ -32,14 +32,18 @@ public class RegistrationPage extends BasePage {
     @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/form/div[2]/span[2]")
     private WebElement errorMessage;
 
+    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/form/a")
+    private WebElement createAccountButton;
+
 
     public RegistrationPage() {
-        super(true);
+        super(false);
     }
 
     @Override
-    protected void openPage() {
-        //do nothing
+    public void openPage() {
+        createAccountButton.click();
+        TimeUtils.waitForPageLoaded();
     }
 
     @Override

@@ -34,7 +34,7 @@ public class RegistrationTests {
     @Test
     public void testRegisterNewAccountAndLogin() {
         mainPage.goToLoginPage();
-        loginPage.goToRegistrationPage();
+        registrationPage.openPage();
         String email = registrationPage.registerNewAccount();
         loginPage.login(email, TestsConfig.getConfig().getPassword());
         assertTrue("User can not login", associationPage.isPageOpened());
@@ -43,7 +43,7 @@ public class RegistrationTests {
     @Test
     public void testRegisterNewAccountWithAlreadyRegisteredUser() {
         mainPage.goToLoginPage();
-        loginPage.goToRegistrationPage();
+        registrationPage.openPage();
         registrationPage.registerNewAccount(TestsConfig.getConfig().getUsername(), TestsConfig.getConfig().getPassword());
         assertEquals("This username is already taken!", registrationPage.getErrorMessage());
     }
