@@ -24,12 +24,6 @@ public class MyFortressPage extends BasePage {
     @FindBy(xpath = "html/body/div[4]/div/div/div/div[3]/button[1]")
     private WebElement modalWindowRestart;
 
-    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/div/div/div/div/form/div/input")
-    private WebElement registrationInput;
-
-    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/div/div/div/div/form/button")
-    private WebElement registrationButton;
-
     @FindBys(@FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div[1]/div/div/div[2]/table/tbody/tr[2]/td/div/table/tbody/tr"))
     private List<WebElement> rowCollection;
 
@@ -85,7 +79,7 @@ public class MyFortressPage extends BasePage {
 
             }
         });
-        TimeUtils.waitForSecondsTread(20);
+        TimeUtils.waitForSecondsTread(30);
     }
 
     public String getPDstatus(String pdName) {
@@ -110,12 +104,4 @@ public class MyFortressPage extends BasePage {
         TimeUtils.waitForElement(10, ".//*[@id='toast-container']/div");
     }
 
-    public void associateFRD(String code) {
-        getDriver().navigate().refresh();
-        TimeUtils.waitForElement(10, ".//*[@id='page-wrapper']/div[2]/div/div/div/div");
-        registrationInput.sendKeys(code);
-        TimeUtils.waitForSecondsTread(3);
-        registrationButton.click();
-        TimeUtils.waitForPageLoaded();
-    }
 }

@@ -54,9 +54,21 @@ public class FRDPage extends BasePage {
     @FindBy(id = "pin")
     private WebElement registrationCode;
 
+    @FindBy(xpath= ".//*/td[contains (text(), 'registration code')]/../td[2]")
+    private WebElement registrationCodeSettings;
+
+	@FindBy(id = "mask")
+	private WebElement mask;
+
+	@FindBy(id = "kbd-input")
+	private WebElement kbdInput;
+
+	@FindBy(id = "unlock")
+	private WebElement unlock;
+
 
     public FRDPage() {
-        super(false);
+        super(true);
     }
 
     @Override
@@ -112,7 +124,28 @@ public class FRDPage extends BasePage {
         confirmButton.click();
     }
 
-    public String getRegistrationCode() {
+    public String getRegistrationCodeUnboxing() {
         return registrationCode.getText();
+    }
+
+    public String getRegistrationCode() {
+        lockOn();
+        openSettingsScreen();
+        return registrationCodeSettings.getText();
+    }
+
+    private void lockOn() {
+        TimeUtils.waitForSecondsTread(5);
+        if (mask.isDisplayed()){
+            mask.click();
+            kbdInput.sendKeys("1111");
+            unlock.click();
+        }
+        TimeUtils.waitForSecondsTread(2);
+    }
+
+    private void openSettingsScreen() {
+        settingsIcon.click();
+        TimeUtils.waitForPageLoaded();
     }
 }

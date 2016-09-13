@@ -26,6 +26,7 @@ public class MyFortressTests {
     MyFortressPage myFortressPage;
     AssociatedUsersPage associatedUsersPage;
     AssociationPage associationPage;
+    FRDPage frdPage;
 
     @Rule
     public ScreenShotOnFailRule screenShotOnFailRule = new ScreenShotOnFailRule();
@@ -39,6 +40,7 @@ public class MyFortressTests {
         myFortressPage = new MyFortressPage();
         associationPage = new AssociationPage();
         associatedUsersPage = new AssociatedUsersPage();
+        frdPage = new FRDPage();
         mainPage.goToLoginPage();
         loginPage.login(TestsConfig.getConfig().getUsername(), TestsConfig.getConfig().getPassword());
     }
@@ -78,11 +80,14 @@ public class MyFortressTests {
 
     }
 
-    // @Test
-    public void testAssosiateFRDWithUser() {
-
+    @Test
+    public void E_testAssosiateFRDWithUser() {
+        mainPage.openNewTab("http://192.168.66.228:8081");
+        String code = frdPage.getRegistrationCode();
+        mainPage.switchTab();
+        associationPage.associateFRD(code);
+        assertTrue("FRD is not associated", dashboardPage.isPageOpened());
     }
-
 
 
     // @Test
@@ -96,7 +101,7 @@ public class MyFortressTests {
     }
 
     // @Test
-    public void testActivityCountonDashboard() {
+    public void testActivityCountOnDashboard() {
 
     }
 

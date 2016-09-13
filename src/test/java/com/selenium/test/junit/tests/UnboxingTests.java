@@ -22,6 +22,7 @@ public class UnboxingTests {
     DashboardPage dashboardPage;
     MyFortressPage myFortressPage;
     FRDPage frdPage;
+    AssociationPage associationPage;
 
     String registrationCode;
 
@@ -35,6 +36,7 @@ public class UnboxingTests {
         loginPage = new LoginPage();
         dashboardPage = new DashboardPage();
         myFortressPage = new MyFortressPage();
+        associationPage = new AssociationPage();
         frdPage = new FRDPage();
         mainPage.goToLoginPage();
         loginPage.login(TestsConfig.getConfig().getUsername(), TestsConfig.getConfig().getPassword());
@@ -69,11 +71,11 @@ public class UnboxingTests {
         TimeUtils.waitForElementId(5, "confirm_button");
         frdPage.setSecurityLevel("med");
         TimeUtils.waitForElementId(5, "pin");
-        registrationCode = frdPage.getRegistrationCode();
+        registrationCode = frdPage.getRegistrationCodeUnboxing();
         frdPage.clickNext();
         TimeUtils.waitForElementId(10, "mask");
         mainPage.switchTab();
-        myFortressPage.associateFRD(registrationCode);
+        associationPage.associateFRD(registrationCode);
         assertTrue("FRD is not associated", dashboardPage.isPageOpened());
     }
 }
