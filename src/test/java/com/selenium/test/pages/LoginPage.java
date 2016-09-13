@@ -13,22 +13,22 @@ import java.util.NoSuchElementException;
 
 public class LoginPage extends BasePage {
 
-    @FindBy(xpath=".//*[@id='page-wrapper']/div[2]/div/div/form/div[1]/input")
+    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/form/div[1]/input")
     private WebElement userName;
 
-    @FindBy(xpath=".//*[@id='page-wrapper']/div[2]/div/div/form/div[2]/input")
+    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/form/div[2]/input")
     private WebElement password;
 
-    @FindBy(xpath=".//*[@id='page-wrapper']/div[2]/div/div/form/button")
+    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/form/button")
     private WebElement loginButton;
 
-    @FindBy(xpath=".//*[@id='page-wrapper']/div[2]/div/div/form/span")
+    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/form/span")
     private WebElement errorMessage;
 
-    @FindBy(xpath=".//*[@id='page-wrapper']/div[2]/div/div/form/a")
+    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/form/a")
     private WebElement createAccountButton;
 
-    public LoginPage(){
+    public LoginPage() {
         super(true);
     }
 
@@ -41,12 +41,12 @@ public class LoginPage extends BasePage {
     public boolean isPageOpened() {
         try {
             return loginButton.isDisplayed();
-        } catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             return false;
         }
     }
 
-    public void login (String user, String pass){
+    public void login(String user, String pass) {
         userName.sendKeys(user);
         password.sendKeys(pass);
         loginButton.click();

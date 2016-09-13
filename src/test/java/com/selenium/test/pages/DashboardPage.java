@@ -10,11 +10,11 @@ import java.util.NoSuchElementException;
 
 public class DashboardPage extends BasePage {
 
-	@FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div[3]/div[6]/div/div[2]/h1[1]")
-	private WebElement status;
+    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div[3]/div[6]/div/div[2]/h1[1]")
+    private WebElement status;
 
 
-    public DashboardPage(){
+    public DashboardPage() {
         super(true);
     }
 
@@ -29,7 +29,7 @@ public class DashboardPage extends BasePage {
             WebElement con = getDriver().findElement(By.xpath(".//*[@id='page-wrapper']/div[2]/div/div[2]/div[2]/div[1]"));
             return con.isDisplayed();
 
-        } catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             return false;
         }
     }

@@ -42,7 +42,7 @@ public class MainPage extends BasePage {
         return loginButton.isDisplayed();
     }
 
-    public void goToLoginPage(){
+    public void goToLoginPage() {
         loginButton.click();
         TimeUtils.waitForPageLoaded();
     }
@@ -65,14 +65,13 @@ public class MainPage extends BasePage {
     }
 
     public void openNewTab(String url) {
-        getDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL +"t");
-        //String windowHandle = getDriver().getWindowHandle();
+        getDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL + "t");
         getDriver().get(url);
         TimeUtils.waitForPageLoaded();
     }
 
     public void switchTab() {
-        Actions action= new Actions(getDriver());
+        Actions action = new Actions(getDriver());
         action.keyDown(Keys.CONTROL).sendKeys(Keys.TAB).build().perform();
     }
 

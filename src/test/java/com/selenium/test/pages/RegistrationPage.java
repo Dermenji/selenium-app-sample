@@ -29,8 +29,8 @@ public class RegistrationPage extends BasePage {
     @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/form/button")
     private WebElement generateButton;
 
-	@FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/form/div[2]/span[2]")
-	private WebElement errorMessage;
+    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/form/div[2]/span[2]")
+    private WebElement errorMessage;
 
 
     public RegistrationPage() {
