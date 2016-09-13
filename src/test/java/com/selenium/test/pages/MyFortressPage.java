@@ -59,6 +59,7 @@ public class MyFortressPage extends BasePage {
     public void restartDevice() {
         restartButton.click();
         clickResetAndWait();
+        TimeUtils.waitForSecondsTread(10);
     }
 
     public void pdDoAction(String pdName, String action) {

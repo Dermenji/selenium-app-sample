@@ -9,15 +9,17 @@ import com.selenium.test.pages.MyFortressPage;
 import com.selenium.test.utils.TimeUtils;
 import com.selenium.test.webtestsbase.WebDriverFactory;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static com.codeborne.selenide.Selenide.$;
 
-
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MyFortressTests {
 
     MainPage mainPage;
@@ -40,7 +42,7 @@ public class MyFortressTests {
     }
 
     @Test
-    public void testFRDRestart() {
+    public void A_testFRDRestart() {
         mainPage.goToMyFortressPage();
         myFortressPage.restartDevice();
         mainPage.goToDashBoardPage();
@@ -52,30 +54,30 @@ public class MyFortressTests {
     }
 
     @Test
-    public void testBlockPD() {
+    public void B_testBlockPD() {
         mainPage.goToMyFortressPage();
         myFortressPage.pdDoAction("maria", "Disallow");
         assertEquals("Connected Blocked", myFortressPage.getPDstatus("maria"));
     }
 
     @Test
-    public void testUnBlockPD() {
+    public void C_testUnBlockPD() {
         mainPage.goToMyFortressPage();
         myFortressPage.pdDoAction("maria", "Allow");
         assertEquals("Connected", myFortressPage.getPDstatus("maria"));
     }
 
-    @Test
+    // @Test
     public void testAssosiateFRDWithUser() {
 
     }
 
-    @Test
+    // @Test
     public void testDeleteAssosiatedFRDWithUser() {
 
     }
 
-    @Test
+    // @Test
     public void testUpdateFRDDetails() {
 
     }

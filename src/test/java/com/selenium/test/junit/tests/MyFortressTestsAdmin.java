@@ -37,11 +37,6 @@ public class MyFortressTestsAdmin {
     }
 
     @Test
-    public void testUpdateFRDToLastVersion() {
-
-    }
-
-    @Test
     public void testAddAdminRole() {
 
     }

@@ -6,12 +6,15 @@ import com.selenium.test.pages.*;
 import com.selenium.test.utils.TimeUtils;
 import com.selenium.test.webtestsbase.WebDriverFactory;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UnboxingTests {
 
     MainPage mainPage;
@@ -38,7 +41,7 @@ public class UnboxingTests {
     }
 
     @Test
-    public void testFactoryReset() {
+    public void A_testFactoryReset() {
         mainPage.goToMyFortressPage();
         myFortressPage.factoryReset();
         mainPage.openNewTab("http://192.168.66.228:8081");
@@ -46,7 +49,7 @@ public class UnboxingTests {
     }
 
     @Test
-    public void testUnboxingProcess() {
+    public void B_testUnboxingProcess() {
         mainPage.openNewTab("http://192.168.66.228:8081");
         assertTrue("Unboxing is not started", frdPage.isUnboxingPageOpened());
         frdPage.clickNext();
@@ -73,5 +76,4 @@ public class UnboxingTests {
         myFortressPage.associateFRD(registrationCode);
         assertTrue("FRD is not associated", dashboardPage.isPageOpened());
     }
-
 }
