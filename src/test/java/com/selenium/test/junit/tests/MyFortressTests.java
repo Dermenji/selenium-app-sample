@@ -82,7 +82,7 @@ public class MyFortressTests {
 
     @Test
     public void E_testAssosiateFRDWithUser() {
-        mainPage.openNewTab("http://192.168.66.228:8081");
+        mainPage.openNewTab(TestsConfig.getConfig().getFrdUrl());
         String code = frdPage.getRegistrationCode();
         mainPage.switchTab();
         associationPage.associateFRD(code);
