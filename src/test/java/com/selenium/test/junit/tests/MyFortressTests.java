@@ -12,8 +12,11 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import static com.codeborne.selenide.Selenide.open;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static com.codeborne.selenide.Selenide.$;
+
 
 public class MyFortressTests {
 
@@ -60,5 +63,20 @@ public class MyFortressTests {
         mainPage.goToMyFortressPage();
         myFortressPage.pdDoAction("maria", "Allow");
         assertEquals("Connected", myFortressPage.getPDstatus("maria"));
+    }
+
+    @Test
+    public void testAssosiateFRDWithUser() {
+
+    }
+
+    @Test
+    public void testDeleteAssosiatedFRDWithUser() {
+
+    }
+
+    @Test
+    public void testUpdateFRDDetails() {
+
     }
 }

@@ -28,20 +28,27 @@ public class TimeUtils {
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath(xPath)));
     }
 
+    public static void waitForElementId(int timeoutInSeconds, String id) {
+        WebElement element = (new WebDriverWait(WebDriverFactory.getDriver(), timeoutInSeconds))
+                .until(ExpectedConditions.presenceOfElementLocated(By.id(id)));
+    }
+
     public static void waitForPageLoaded() {
         JavascriptExecutor js = (JavascriptExecutor) WebDriverFactory.getDriver();
 
         if (js.executeScript("return document.readyState").toString().equals("complete")) {
-            System.out.println("Page Is loaded.");
             return;
         }
 
         for (int i = 0; i < 25; i++) {
             try {
                 Thread.sleep(1000);
+                WebDriverFactory.getDriver().navigate().refresh();
+                System.out.println("Try to load page");
             } catch (InterruptedException e) {
             }
             if (js.executeScript("return document.readyState").toString().equals("complete")) {
+                System.out.println("Can not load page");
                 break;
             }
         }

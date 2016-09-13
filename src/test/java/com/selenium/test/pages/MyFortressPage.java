@@ -18,8 +18,20 @@ public class MyFortressPage extends BasePage {
     @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div[1]/div/div/div[2]/table/tbody/tr/td[4]/button[2]")
     private WebElement restartButton;
 
+    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div[1]/div/div/div[2]/table/tbody/tr/td[4]/button[1]")
+    private WebElement factoryReset;
+
     @FindBy(xpath = "html/body/div[4]/div/div/div/div[3]/button[1]")
     private WebElement modalWindowRestart;
+
+    @FindBy(xpath = ".//*[@id='side-menu']/li[2]/ul/li[5]/a")
+    private WebElement associationPage;
+
+    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/div/div/div/div/form/div/input")
+    private WebElement registrationInput;
+
+    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/div/div/div/div/form/button")
+    private WebElement registrationButton;
 
     @FindBys(@FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div[1]/div/div/div[2]/table/tbody/tr[2]/td/div/table/tbody/tr"))
     private List<WebElement> rowCollection;
@@ -46,10 +58,7 @@ public class MyFortressPage extends BasePage {
 
     public void restartDevice() {
         restartButton.click();
-        TimeUtils.waitForElement(10, "html/body/div[4]/div/div/div");
-        modalWindowRestart.click();
-        TimeUtils.waitForElement(10, ".//*[@id='toast-container']/div");
-        TimeUtils.waitForSecondsTread(5);
+        clickResetAndWait();
     }
 
     public void pdDoAction(String pdName, String action) {
@@ -85,5 +94,26 @@ public class MyFortressPage extends BasePage {
             }
         }
         return null;
+    }
+
+    public void factoryReset() {
+        factoryReset.click();
+        clickResetAndWait();
+        TimeUtils.waitForSecondsTread(50);
+    }
+
+    private void clickResetAndWait() {
+        TimeUtils.waitForElement(10, "html/body/div[4]/div/div/div");
+        modalWindowRestart.click();
+        TimeUtils.waitForElement(10, ".//*[@id='toast-container']/div");
+    }
+
+    public void associateFRD(String code) {
+        getDriver().navigate().refresh();
+        TimeUtils.waitForElement(10, ".//*[@id='page-wrapper']/div[2]/div/div/div/div");
+        registrationInput.sendKeys(code);
+        TimeUtils.waitForSecondsTread(3);
+        registrationButton.click();
+        TimeUtils.waitForPageLoaded();
     }
 }

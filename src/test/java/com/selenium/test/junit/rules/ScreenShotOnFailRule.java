@@ -6,6 +6,10 @@ import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.Logs;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -27,6 +31,12 @@ public class ScreenShotOnFailRule implements TestRule {
                     WebDriverFactory.takeScreenShot();;
                     throw t;
                 }finally {
+                    Logs logs = WebDriverFactory.getDriver().manage().logs();
+                    LogEntries logEntries = logs.get(LogType.DRIVER);
+
+                    for (LogEntry logEntry : logEntries) {
+                        System.out.println(logEntry.getMessage());
+                    }
                     WebDriverFactory.finishBrowser();
                 }
             }

@@ -26,8 +26,9 @@ public class DashboardPage extends BasePage {
     @Override
     public boolean isPageOpened() {
         try {
-            WebElement con = getDriver().findElement(By.id("side-menu"));
+            WebElement con = getDriver().findElement(By.xpath(".//*[@id='page-wrapper']/div[2]/div/div[2]/div[2]/div[1]"));
             return con.isDisplayed();
+
         } catch (NoSuchElementException e){
             return false;
         }
