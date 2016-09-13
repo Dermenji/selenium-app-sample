@@ -33,12 +33,21 @@ public class TestsConfig {
     @Property("password")
     private String password = "";
 
+    @Property("frd.url")
+    private String frdUrl = "";
+
+
+
     public String getUsername() {
         return username;
     }
 
     public String getPassword() {
         return password;
+    }
+
+    public String getFrdUrl() {
+        return frdUrl;
     }
 
     public Browser getBrowser() {

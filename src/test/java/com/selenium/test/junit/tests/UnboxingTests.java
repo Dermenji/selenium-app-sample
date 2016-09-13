@@ -46,13 +46,13 @@ public class UnboxingTests {
     public void A_testFactoryReset() {
         myFortressPage.openPage();
         myFortressPage.factoryReset();
-        mainPage.openNewTab("http://192.168.66.228:8081");
+        mainPage.openNewTab(TestsConfig.getConfig().getFrdUrl());
         assertTrue("Unboxing is not started", frdPage.isUnboxingPageOpened());
     }
 
     @Test
     public void B_testUnboxingProcess() {
-        mainPage.openNewTab("http://192.168.66.228:8081");
+        mainPage.openNewTab(TestsConfig.getConfig().getFrdUrl());
         assertTrue("Unboxing is not started", frdPage.isUnboxingPageOpened());
         frdPage.clickNext();
         TimeUtils.waitForElementId(5, "wan_photo");
