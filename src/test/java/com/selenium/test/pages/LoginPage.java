@@ -13,16 +13,16 @@ import java.util.NoSuchElementException;
 
 public class LoginPage extends BasePage {
 
-    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/form/div[1]/input")
+    @FindBy(xpath = ".//input[contains (@type, 'email')]")
     private WebElement userName;
 
-    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/form/div[2]/input")
+    @FindBy(xpath = ".//input[contains (@type, 'password')]")
     private WebElement password;
 
-    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/form/button")
+    @FindBy(xpath = ".//*/button")
     private WebElement loginButton;
 
-    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/form/span")
+    @FindBy(xpath = ".//*/form/span")
     private WebElement errorMessage;
 
 

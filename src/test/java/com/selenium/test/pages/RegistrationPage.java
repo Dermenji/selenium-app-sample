@@ -11,28 +11,28 @@ import java.util.UUID;
 
 public class RegistrationPage extends BasePage {
 
-    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/form/div[5]/div/label")
+    @FindBy(xpath = ".//*/label")
     private WebElement agree;
 
-    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/form/div[1]/input")
+    @FindBy(xpath = ".//*/form/div[1]/input")
     private WebElement userName;
 
-    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/form/div[2]/input")
+    @FindBy(xpath = ".//*/form/div[2]/input")
     private WebElement emailInput;
 
-    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/form/div[3]/input")
+    @FindBy(xpath = ".//*/form/div[3]/input")
     private WebElement passwordInput;
 
-    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/form/div[4]/input")
+    @FindBy(xpath = ".//*/form/div[4]/input")
     private WebElement confirmPassword;
 
-    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/form/button")
+    @FindBy(xpath = ".//*/form/button")
     private WebElement generateButton;
 
-    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/form/div[2]/span[2]")
+    @FindBy(xpath = ".//*/form/div[2]/span[2]")
     private WebElement errorMessage;
 
-    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div/form/a")
+    @FindBy(xpath = ".//*/form/a")
     private WebElement createAccountButton;
 
 

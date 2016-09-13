@@ -25,10 +25,6 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//*[@id='page-wrapper']/div[1]/div/nav/ul/li[2]/ul/li[1]/a")
     private WebElement signOut;
 
-
-    @FindBy(xpath = ".//*[@id='side-menu']/li[2]/ul/li[1]/a")
-    private WebElement dashBoard;
-
     public MainPage() {
         super(true);
     }

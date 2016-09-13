@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
 
 public class AssociatedUsersPage extends BasePage {
 
-    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div[2]/div[2]/div[1]/a[2]")
+    @FindBy(xpath = ".//*[@id='page-wrapper']//a[contains (text(), 'Associated users')]")
     private WebElement associatedUsers;
 
     @FindBy(xpath = "//*/th[contains(text(), 'Remove')]")

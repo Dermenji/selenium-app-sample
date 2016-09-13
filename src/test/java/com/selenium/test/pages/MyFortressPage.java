@@ -12,13 +12,13 @@ import java.util.NoSuchElementException;
 
 public class MyFortressPage extends BasePage {
 
-    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div[1]/div/div/div[2]/table/tbody/tr/td[3]/button[1]")
+    @FindBy(xpath = ".//*/button[contains (text(), 'Show devices')]")
     private WebElement showDevices;
 
-    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div[1]/div/div/div[2]/table/tbody/tr/td[4]/button[2]")
+    @FindBy(xpath = ".//*/button[contains (text(), 'Restart')]")
     private WebElement restartButton;
 
-    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div[1]/div/div/div[2]/table/tbody/tr/td[4]/button[1]")
+    @FindBy(xpath = ".//*/button[contains (text(), 'Factory Reset')]")
     private WebElement factoryReset;
 
     @FindBy(xpath = "html/body/div[4]/div/div/div/div[3]/button[1]")
