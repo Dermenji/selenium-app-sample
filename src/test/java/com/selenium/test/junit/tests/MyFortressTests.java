@@ -81,4 +81,24 @@ public class MyFortressTests {
     public void testUpdateFRDDetails() {
 
     }
+
+    // @Test
+    public void testSecurityModeChange() {
+
+    }
+
+    // @Test
+    public void testActivityCountonDashboard() {
+
+    }
+
+    // @Test
+    public void testPrioritySet() {
+
+    }
+
+    // @Test
+    public void testDevicesCountOnDashboard() {
+
+    }
 }

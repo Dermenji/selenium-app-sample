@@ -21,7 +21,7 @@ public class CapabilitiesGenerator {
 
                 DesiredCapabilities desiredCapabilities = DesiredCapabilities.firefox();
                 desiredCapabilities.setCapability(CapabilityType.LOGGING_PREFS, logs);
-               // DesiredCapabilities.firefox()
+                // DesiredCapabilities.firefox()
                 return desiredCapabilities;
             case CHROME:
                 if (System.getProperty("webdriver.chrome.driver") == null) {

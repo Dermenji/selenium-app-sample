@@ -23,7 +23,7 @@ public class PropertiesLoader {
                 properties = new Properties();
                 try {
                     InputStream stream = PropertiesLoader.class.getClassLoader().getResourceAsStream(propertyFileName);
-                    if(stream != null) {
+                    if (stream != null) {
                         properties.load(stream);
                     } else {
                         throw new TestsConfigurationException("Unable to read property file with name '" + propertyFileName + "' - file not found");
