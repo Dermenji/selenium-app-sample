@@ -3,12 +3,10 @@ package com.selenium.test.junit.tests;
 import com.selenium.test.configuration.TestsConfig;
 import com.selenium.test.junit.rules.ScreenShotOnFailRule;
 import com.selenium.test.pages.*;
+import com.selenium.test.utils.RestDeviceClient;
 import com.selenium.test.utils.TimeUtils;
 import com.selenium.test.webtestsbase.WebDriverFactory;
-import org.junit.Before;
-import org.junit.FixMethodOrder;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runners.MethodSorters;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -27,6 +25,11 @@ public class MyFortressTests {
     AssociatedUsersPage associatedUsersPage;
     AssociationPage associationPage;
     FRDPage frdPage;
+
+   /* @BeforeClass
+    public static void beforeClass() {
+        RestDeviceClient.addPD();
+    }*/
 
     @Rule
     public ScreenShotOnFailRule screenShotOnFailRule = new ScreenShotOnFailRule();
@@ -80,7 +83,7 @@ public class MyFortressTests {
 
     }
 
-    @Test
+   // @Test
     public void E_testAssosiateFRDWithUser() {
         mainPage.openNewTab(TestsConfig.getConfig().getFrdUrl());
         String code = frdPage.getRegistrationCode();
@@ -90,7 +93,7 @@ public class MyFortressTests {
     }
 
 
-    // @Test
+    @Test
     public void testUpdateFRDDetails() {
 
     }
