@@ -26,10 +26,11 @@ public class MyFortressTests {
     AssociationPage associationPage;
     FRDPage frdPage;
 
-   /* @BeforeClass
+    @BeforeClass
     public static void beforeClass() {
-        RestDeviceClient.addPD();
-    }*/
+        String id = RestDeviceClient.addPD();
+        RestDeviceClient.changeStatus(id, "192.168.66.111", "true");
+    }
 
     @Rule
     public ScreenShotOnFailRule screenShotOnFailRule = new ScreenShotOnFailRule();
@@ -63,15 +64,15 @@ public class MyFortressTests {
     @Test
     public void B_testBlockPD() {
         myFortressPage.openPage();
-        myFortressPage.pdDoAction("maria", "Disallow");
+        myFortressPage.pdDoAction("Test", "Disallow");
         assertEquals("Connected Blocked", myFortressPage.getPDstatus("maria"));
     }
 
     @Test
     public void C_testUnBlockPD() {
         myFortressPage.openPage();
-        myFortressPage.pdDoAction("maria", "Allow");
-        assertEquals("Connected", myFortressPage.getPDstatus("maria"));
+        myFortressPage.pdDoAction("Test", "Allow");
+        assertEquals("Connected", myFortressPage.getPDstatus("Test"));
     }
 
     @Test
@@ -83,7 +84,7 @@ public class MyFortressTests {
 
     }
 
-   // @Test
+    @Test
     public void E_testAssosiateFRDWithUser() {
         mainPage.openNewTab(TestsConfig.getConfig().getFrdUrl());
         String code = frdPage.getRegistrationCode();
