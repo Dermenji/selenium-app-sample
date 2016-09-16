@@ -33,7 +33,7 @@ public class MyFortressTestsAdmin {
         dashboardPage = new DashboardPage();
         myFortressPage = new MyFortressPage();
         mainPage.goToLoginPage();
-        loginPage.login("", "");
+        loginPage.login("adminlogin@te.st", "P@ssw0rd");
     }
 
     @Test
