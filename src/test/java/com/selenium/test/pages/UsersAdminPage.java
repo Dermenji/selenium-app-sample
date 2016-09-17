@@ -33,9 +33,11 @@ public class UsersAdminPage extends BasePage {
     @FindBy(xpath = ".//*/span[contains (text(), 'Remove Admin role')]")
     private WebElement adminRoleButtonDisable;
 
-    @FindBy(xpath = ".//*/div[contains (text(), 'Role: Admin')]")
-    private WebElement adminRole;
+    @FindBy(xpath = ".//*/span[contains (text(), 'Disable user account')]")
+    private WebElement disableUserButton;
 
+    @FindBy(xpath = ".//*/span[contains (text(), 'Enable user account')]")
+    private WebElement enableUserButton;
 
     public UsersAdminPage() {
         super(false);
@@ -58,7 +60,6 @@ public class UsersAdminPage extends BasePage {
         }
     }
 
-
     public void findUser(String username) {
         searchInput.sendKeys(username);
         TimeUtils.waitForSecondsTread(5);
@@ -73,6 +74,16 @@ public class UsersAdminPage extends BasePage {
 
     public void removeAdminRole() {
         adminRoleButtonDisable.click();
-        TimeUtils.waitForInvisibility(10, adminRole);
+        TimeUtils.waitForInvisibility(10, By.xpath("//*/div[contains (text(), 'Role: Admin')]"));
+    }
+
+    public void disableUser() {
+        disableUserButton.click();
+        TimeUtils.waitForElement(10, By.xpath(".//*/span[contains (text(), 'Enable user account')]"));
+    }
+
+    public void enableUser() {
+        enableUserButton.click();
+        TimeUtils.waitForInvisibility(10, By.xpath(".//*/span[contains (text(), 'Enable user account')]"));
     }
 }
