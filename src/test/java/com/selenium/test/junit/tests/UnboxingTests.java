@@ -10,12 +10,33 @@ import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UnboxingTests {
+
+    @FindBy(id = "wan_photo")
+    private WebElement wan_photo;
+
+    @FindBy(id = "success_img")
+    private WebElement success_img;
+
+    @FindBy(id = "info_single")
+    private WebElement info_single;
+
+    @FindBy(id = "confirm_button")
+    private WebElement confirm_button;
+
+    @FindBy(id = "pin")
+    private WebElement pin;
+
+    @FindBy(id = "mask")
+    private WebElement mask;
 
     MainPage mainPage;
     LoginPage loginPage;
@@ -55,25 +76,25 @@ public class UnboxingTests {
         mainPage.openNewTab(TestsConfig.getConfig().getFrdUrl());
         assertTrue("Unboxing is not started", frdPage.isUnboxingPageOpened());
         frdPage.clickNext();
-        TimeUtils.waitForElementId(5, "wan_photo");
+        TimeUtils.waitForElement(5, By.id("wan_photo"));
         frdPage.clickNext();
-        TimeUtils.waitForElementId(5, "success_img");
+        TimeUtils.waitForElement(5, By.id("success_img"));
         frdPage.clickNext();
-        TimeUtils.waitForElementId(5, "wan_photo");
+        TimeUtils.waitForElement(5,By.id("wan_photo"));
         frdPage.clickNext();
-        TimeUtils.waitForElementId(5, "success_img");
+        TimeUtils.waitForElement(5, By.id("success_img"));
         frdPage.clickNext();
         frdPage.setUnboxingPinCode("1111", "1111");
         frdPage.clickNext();
-        TimeUtils.waitForElementId(5, "info_single");
+        TimeUtils.waitForElement(5, By.id("info_single"));
         frdPage.setZipAndPhone("11111", "111", "111", "1111");
         frdPage.clickNext();
-        TimeUtils.waitForElementId(5, "confirm_button");
+        TimeUtils.waitForElement(5, By.id("confirm_button"));
         frdPage.setSecurityLevel("med");
-        TimeUtils.waitForElementId(5, "pin");
+        TimeUtils.waitForElement(5, By.id("pin"));
         registrationCode = frdPage.getRegistrationCodeUnboxing();
         frdPage.clickNext();
-        TimeUtils.waitForElementId(10, "mask");
+        TimeUtils.waitForElement(10, By.id("mask"));
         mainPage.switchTab();
         associationPage.associateFRD(registrationCode);
         assertTrue("FRD is not associated", dashboardPage.isPageOpened());

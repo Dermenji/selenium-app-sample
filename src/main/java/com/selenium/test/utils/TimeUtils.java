@@ -24,12 +24,13 @@ public class TimeUtils {
         }
     }
 
-    public static void waitForElement(int timeoutInSeconds, WebElement webElement) {
+    public static WebElement waitForElement(int timeoutInSeconds, By el) {
         WebElement element = (new WebDriverWait(WebDriverFactory.getDriver(), timeoutInSeconds))
-                .until(ExpectedConditions.presenceOfElementLocated((By) webElement));
+                .until(ExpectedConditions.presenceOfElementLocated(el));
+        return element;
     }
 
-    public static void waitForInvisibility(WebElement webElement, int maxSeconds) {
+    public static void waitForInvisibility(int maxSeconds, WebElement webElement) {
         Long startTime = System.currentTimeMillis();
         try {
             while (System.currentTimeMillis() - startTime < maxSeconds * 1000 && webElement.isDisplayed()) {
@@ -59,4 +60,5 @@ public class TimeUtils {
             }
         }
     }
+
 }

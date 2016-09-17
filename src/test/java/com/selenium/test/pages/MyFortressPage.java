@@ -30,7 +30,6 @@ public class MyFortressPage extends BasePage {
     @FindBy(xpath = ".//*[@id='side-menu']//a[contains (text(), 'My Fortress')]")
     private WebElement myFortress;
 
-
     public MyFortressPage() {
         super(false);
     }
@@ -59,7 +58,7 @@ public class MyFortressPage extends BasePage {
 
     public void pdDoAction(String pdName, String action) {
         showDevices.click();
-        TimeUtils.waitForElement(10, ".//*[@id='page-wrapper']/div[2]/div/div[1]/div/div/div[2]/table/tbody/tr[2]/td/div/table/tbody");
+        TimeUtils.waitForElement(10, By.xpath(".//*[@id='page-wrapper']/div[2]/div/div[1]/div/div/div[2]/table/tbody/tr[2]/td/div/table/tbody"));
 
         rowCollection.stream().filter(rowElement -> rowElement.getText().contains(pdName)).forEach(rowElement -> {
             List<WebElement> colCollection = rowElement.findElements(By.xpath("td"));
@@ -103,9 +102,9 @@ public class MyFortressPage extends BasePage {
     }
 
     private void clickResetAndWait() {
-        TimeUtils.waitForElement(10, "html/body/div[4]/div/div/div");
+        TimeUtils.waitForElement(10, By.xpath("html/body/div[4]/div/div/div"));
         modalWindowRestart.click();
-        TimeUtils.waitForElement(10, ".//*[@id='toast-container']/div");
+        TimeUtils.waitForElement(10, By.xpath(".//*[@id='toast-container']/div"));
     }
 
 }

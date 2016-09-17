@@ -21,6 +21,9 @@ public class AssociationPage extends BasePage {
     @FindBy(xpath = ".//*[@id='page-wrapper']//button")
     private WebElement registrationButton;
 
+    @FindBy(xpath = ".//*[@id='page-wrapper']//button")
+    private WebElement webElement;
+
 
     public AssociationPage() {
         super(false);
@@ -43,7 +46,7 @@ public class AssociationPage extends BasePage {
 
     public void associateFRD(String code) {
         getDriver().navigate().refresh();
-        TimeUtils.waitForElement(10, ".//*[@id='page-wrapper']/div[2]/div/div/div/div");
+        TimeUtils.waitForElement(10, By.xpath(".//*[@id='page-wrapper']//button"));
         registrationInput.sendKeys(code);
         TimeUtils.waitForSecondsTread(3);
         registrationButton.click();

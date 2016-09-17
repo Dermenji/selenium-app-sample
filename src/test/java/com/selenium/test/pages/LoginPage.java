@@ -25,8 +25,6 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = ".//*/form/span")
     private WebElement errorMessage;
 
-
-
     public LoginPage() {
         super(false);
     }
