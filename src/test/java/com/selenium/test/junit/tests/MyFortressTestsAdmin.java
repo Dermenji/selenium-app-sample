@@ -6,12 +6,15 @@ import com.selenium.test.pages.*;
 import com.selenium.test.utils.TimeUtils;
 import com.selenium.test.webtestsbase.WebDriverFactory;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MyFortressTestsAdmin {
 
     MainPage mainPage;
@@ -36,16 +39,36 @@ public class MyFortressTestsAdmin {
     }
 
     @Test
-    public void testAddAdminRole() {
+    public void A_testAddAdminRole() {
         usersAdminPage.openPage();
         usersAdminPage.findUser(TestsConfig.getConfig().getUsername());
         usersAdminPage.addAdminRole();
     }
 
     @Test
-    public void testDeleteAdminRole() {
+    public void B_testDeleteAdminRole() {
         usersAdminPage.openPage();
         usersAdminPage.findUser(TestsConfig.getConfig().getUsername());
         usersAdminPage.removeAdminRole();
+    }
+
+    @Test
+    public void C_testDisableUser() {
+        usersAdminPage.openPage();
+        usersAdminPage.findUser(TestsConfig.getConfig().getUsername());
+        usersAdminPage.disableUser();
+        mainPage.logOut();
+        loginPage.login(TestsConfig.getConfig().getUsername(), TestsConfig.getConfig().getPassword());
+        assertEquals("The user is disabled from system administrator.", loginPage.getErrorMessage());
+    }
+
+    @Test
+    public void D_testEnableUser() {
+        usersAdminPage.openPage();
+        usersAdminPage.findUser(TestsConfig.getConfig().getUsername());
+        usersAdminPage.enableUser();
+        mainPage.logOut();
+        loginPage.login(TestsConfig.getConfig().getUsername(), TestsConfig.getConfig().getPassword());
+        assertTrue("User can not login", dashboardPage.isPageOpened());
     }
 }
