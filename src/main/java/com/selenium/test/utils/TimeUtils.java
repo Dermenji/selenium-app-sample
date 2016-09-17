@@ -3,6 +3,7 @@ package com.selenium.test.utils;
 import com.selenium.test.webtestsbase.WebDriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -23,14 +24,19 @@ public class TimeUtils {
         }
     }
 
-    public static void waitForElement(int timeoutInSeconds, String xPath) {
+    public static void waitForElement(int timeoutInSeconds, WebElement webElement) {
         WebElement element = (new WebDriverWait(WebDriverFactory.getDriver(), timeoutInSeconds))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(xPath)));
+                .until(ExpectedConditions.presenceOfElementLocated((By) webElement));
     }
 
-    public static void waitForElementId(int timeoutInSeconds, String id) {
-        WebElement element = (new WebDriverWait(WebDriverFactory.getDriver(), timeoutInSeconds))
-                .until(ExpectedConditions.presenceOfElementLocated(By.id(id)));
+    public static void waitForInvisibility(WebElement webElement, int maxSeconds) {
+        Long startTime = System.currentTimeMillis();
+        try {
+            while (System.currentTimeMillis() - startTime < maxSeconds * 1000 && webElement.isDisplayed()) {
+            }
+        } catch (StaleElementReferenceException e) {
+            return;
+        }
     }
 
     public static void waitForPageLoaded() {
