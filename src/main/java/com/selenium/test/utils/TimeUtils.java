@@ -24,20 +24,14 @@ public class TimeUtils {
         }
     }
 
-    public static WebElement waitForElement(int timeoutInSeconds, By el) {
+    public static void waitForElement(int timeoutInSeconds, By by) {
         WebElement element = (new WebDriverWait(WebDriverFactory.getDriver(), timeoutInSeconds))
-                .until(ExpectedConditions.presenceOfElementLocated(el));
-        return element;
+                .until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
-    public static void waitForInvisibility(int maxSeconds, WebElement webElement) {
-        Long startTime = System.currentTimeMillis();
-        try {
-            while (System.currentTimeMillis() - startTime < maxSeconds * 1000 && webElement.isDisplayed()) {
-            }
-        } catch (StaleElementReferenceException e) {
-            return;
-        }
+    public static void waitForInvisibility(int timeoutInSeconds, By by) {
+        WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(), timeoutInSeconds);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
     }
 
     public static void waitForPageLoaded() {
