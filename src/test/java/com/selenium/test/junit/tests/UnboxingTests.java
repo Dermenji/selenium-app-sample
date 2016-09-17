@@ -20,24 +20,6 @@ import static org.junit.Assert.assertTrue;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UnboxingTests {
 
-    @FindBy(id = "wan_photo")
-    private WebElement wan_photo;
-
-    @FindBy(id = "success_img")
-    private WebElement success_img;
-
-    @FindBy(id = "info_single")
-    private WebElement info_single;
-
-    @FindBy(id = "confirm_button")
-    private WebElement confirm_button;
-
-    @FindBy(id = "pin")
-    private WebElement pin;
-
-    @FindBy(id = "mask")
-    private WebElement mask;
-
     MainPage mainPage;
     LoginPage loginPage;
     DashboardPage dashboardPage;
@@ -80,7 +62,7 @@ public class UnboxingTests {
         frdPage.clickNext();
         TimeUtils.waitForElement(5, By.id("success_img"));
         frdPage.clickNext();
-        TimeUtils.waitForElement(5,By.id("wan_photo"));
+        TimeUtils.waitForElement(5, By.id("wan_photo"));
         frdPage.clickNext();
         TimeUtils.waitForElement(5, By.id("success_img"));
         frdPage.clickNext();
