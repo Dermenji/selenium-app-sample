@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 
 public class MainPage extends BasePage {
 
-    private static final String PAGE_URL = "";
+    private static final String PAGE_URL = "http://test.portal.fortresstower.com";
 
     @FindBy(xpath = ".//*[@id='page-wrapper']/div[1]/div/nav/ul/li[2]/a")
     private WebElement loginButton;

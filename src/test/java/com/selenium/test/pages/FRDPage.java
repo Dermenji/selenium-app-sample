@@ -15,6 +15,9 @@ public class FRDPage extends BasePage {
     @FindBy(id = "settingsIcon")
     private WebElement settingsIcon;
 
+    @FindBy(id = "devices")
+    private WebElement devicesIcon;
+
     @FindBy(xpath = "html/body")
     private WebElement mainPage;
 
@@ -57,6 +60,9 @@ public class FRDPage extends BasePage {
     @FindBy(xpath = ".//*/td[contains (text(), 'registration code')]/../td[2]")
     private WebElement registrationCodeSettings;
 
+    @FindBy(xpath = ".//*/td[contains (text(), 'fb name')]/../td[2]")
+    private WebElement fbNameSettings;
+
     @FindBy(id = "mask")
     private WebElement mask;
 
@@ -65,6 +71,15 @@ public class FRDPage extends BasePage {
 
     @FindBy(id = "unlock")
     private WebElement unlock;
+
+    @FindBy(xpath = ".//*[@id='security']/h5")
+    private WebElement securityMode;
+
+    @FindBy(xpath = ".//*[@id='activity']/h5")
+    private WebElement activity;
+
+    @FindBy(xpath = ".//*[@id='devices']/h5")
+    private WebElement devices;
 
 
     public FRDPage() {
@@ -146,6 +161,38 @@ public class FRDPage extends BasePage {
 
     private void openSettingsScreen() {
         settingsIcon.click();
+        TimeUtils.waitForPageLoaded();
+    }
+
+    public String getSecurityMode() {
+        lockOn();
+        return securityMode.getText();
+    }
+
+    public String getActivityCount() {
+        lockOn();
+        return activity.getText();
+    }
+
+    public String getDevicesCount() {
+        lockOn();
+        return devices.getText();
+    }
+
+    public String getFBname() {
+        lockOn();
+        openSettingsScreen();
+        return fbNameSettings.getText();
+    }
+
+    public boolean isPDinTheList(String name) {
+        lockOn();
+        openDevicesScreen();
+        return getDriver().findElement(By.xpath(".//*/td[contains (text(), '" + name + "')]")).isDisplayed();
+    }
+
+    private void openDevicesScreen() {
+        devicesIcon.click();
         TimeUtils.waitForPageLoaded();
     }
 }

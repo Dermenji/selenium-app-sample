@@ -24,11 +24,20 @@ public class MyFortressPage extends BasePage {
     @FindBy(xpath = "html/body/div[4]/div/div/div/div[3]/button[1]")
     private WebElement modalWindowRestart;
 
-    @FindBys(@FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div[1]/div/div/div[2]/table/tbody/tr[2]/td/div/table/tbody/tr"))
+    @FindBys(@FindBy(xpath = ".//*/table[contains (@id, 'DataTables_Table_')]/tbody/tr"))
     private List<WebElement> rowCollection;
 
     @FindBy(xpath = ".//*[@id='side-menu']//a[contains (text(), 'My Fortress')]")
     private WebElement myFortress;
+
+    @FindBy(xpath = ".//*[@id='page-wrapper']/div[2]/div/div[1]/div/div/div[2]/table/tbody/tr/td[1]/div")
+    private WebElement frdName;
+
+    @FindBy(xpath = ".//*/table/tbody/tr/td[1]/form/div/input")
+    private WebElement input;
+
+    @FindBy(xpath = ".//*/button[contains(@type, 'submit')]")
+    private WebElement inputSubmit;
 
     public MyFortressPage() {
         super(false);
@@ -58,7 +67,7 @@ public class MyFortressPage extends BasePage {
 
     public void pdDoAction(String pdName, String action) {
         showDevices.click();
-        TimeUtils.waitForElement(10, By.xpath(".//*[@id='page-wrapper']/div[2]/div/div[1]/div/div/div[2]/table/tbody/tr[2]/td/div/table/tbody"));
+        TimeUtils.waitForElement(10, By.xpath(".//*/table[contains (@id, 'DataTables_Table_')]"));
 
         rowCollection.stream().filter(rowElement -> rowElement.getText().contains(pdName)).forEach(rowElement -> {
             List<WebElement> colCollection = rowElement.findElements(By.xpath("td"));
@@ -107,4 +116,28 @@ public class MyFortressPage extends BasePage {
         TimeUtils.waitForElement(10, By.xpath(".//*[@id='toast-container']/div"));
     }
 
+    public void editFRDname(String name) {
+        frdName.click();
+        TimeUtils.waitForElement(5, By.xpath(".//*/form/div/input"));
+        input.clear();
+        input.sendKeys(name);
+        inputSubmit.click();
+        TimeUtils.waitForSeconds(3);
+    }
+
+    public void editPDname(String name, String newName) {
+        showDevices.click();
+        TimeUtils.waitForElement(10, By.xpath(".//*/table[contains (@id, 'DataTables_Table_')]"));
+        for (WebElement rowElement : rowCollection) {
+            if (rowElement.getText().contains(name)) {
+                List<WebElement> colCollection = rowElement.findElements(By.xpath("td"));
+                colCollection.get(0).findElement(By.xpath("div")).click();
+            }
+        }
+        TimeUtils.waitForElement(5, By.xpath(".//*/form/div/input"));
+        input.clear();
+        input.sendKeys(newName);
+        inputSubmit.click();
+        TimeUtils.waitForSeconds(3);
+    }
 }

@@ -26,11 +26,12 @@ public class MyFortressTests {
     AssociationPage associationPage;
     FRDPage frdPage;
 
-    @BeforeClass
+    /*@BeforeClass
     public static void beforeClass() {
         String id = RestDeviceClient.addPD();
+        TimeUtils.waitForSecondsTread(5);
         RestDeviceClient.changeStatus(id, "192.168.66.111", "true");
-    }
+    }*/
 
     @Rule
     public ScreenShotOnFailRule screenShotOnFailRule = new ScreenShotOnFailRule();
@@ -65,7 +66,7 @@ public class MyFortressTests {
     public void B_testBlockPD() {
         myFortressPage.openPage();
         myFortressPage.pdDoAction("Test", "Disallow");
-        assertEquals("Connected Blocked", myFortressPage.getPDstatus("maria"));
+        assertEquals("Connected Blocked", myFortressPage.getPDstatus("Test"));
     }
 
     @Test
@@ -93,29 +94,56 @@ public class MyFortressTests {
         assertTrue("FRD is not associated", dashboardPage.isPageOpened());
     }
 
+    //@Test
+    public void F_testUpdateFRDDetails() {
+
+
+    }
+
 
     @Test
-    public void testUpdateFRDDetails() {
+    public void G_testSecurityModeChange() {
+        dashboardPage.changeSecurityMode("Low");
+        mainPage.openNewTab(TestsConfig.getConfig().getFrdUrl());
+        String mode = frdPage.getSecurityMode();
+        assertEquals("LOW", mode);
+    }
 
+    @Test
+    public void H_testActivityCountOnDashboard() {
+        String dashActivity = dashboardPage.getActivityCount();
+        mainPage.openNewTab(TestsConfig.getConfig().getFrdUrl());
+        String frdActivity = frdPage.getActivityCount();
+        assertEquals(frdActivity, dashActivity);
     }
 
     // @Test
-    public void testSecurityModeChange() {
+    public void I_testPrioritySet() {
 
     }
 
-    // @Test
-    public void testActivityCountOnDashboard() {
-
+    @Test
+    public void J_testDevicesCountOnDashboard() {
+        String dashDevices = dashboardPage.getDevicesCount();
+        mainPage.openNewTab(TestsConfig.getConfig().getFrdUrl());
+        String frdDevices = frdPage.getDevicesCount();
+        assertEquals(dashDevices, frdDevices);
     }
 
-    // @Test
-    public void testPrioritySet() {
-
+    @Test
+    public void K_testChangeFRDname() {
+        myFortressPage.openPage();
+        myFortressPage.editFRDname("Test");
+        mainPage.openNewTab(TestsConfig.getConfig().getFrdUrl());
+        String fbName = frdPage.getFBname();
+        assertEquals("Test", fbName);
     }
 
-    // @Test
-    public void testDevicesCountOnDashboard() {
-
+    @Test
+    public void L_testChangePDname() {
+        myFortressPage.openPage();
+        myFortressPage.editPDname("Test", "newTest");
+        mainPage.openNewTab(TestsConfig.getConfig().getFrdUrl());
+        assertTrue("PD is not renamed", frdPage.isPDinTheList("newTest"));
     }
 }
