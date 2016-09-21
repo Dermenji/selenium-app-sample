@@ -7,6 +7,8 @@ import com.selenium.test.utils.RestDeviceClient;
 import com.selenium.test.utils.TimeUtils;
 import com.selenium.test.webtestsbase.WebDriverFactory;
 import org.junit.*;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -26,12 +28,11 @@ public class MyFortressTests {
     AssociationPage associationPage;
     FRDPage frdPage;
 
-    /*@BeforeClass
+    @BeforeClass
     public static void beforeClass() {
         String id = RestDeviceClient.addPD();
-        TimeUtils.waitForSecondsTread(5);
         RestDeviceClient.changeStatus(id, "192.168.66.111", "true");
-    }*/
+    }
 
     @Rule
     public ScreenShotOnFailRule screenShotOnFailRule = new ScreenShotOnFailRule();
@@ -51,7 +52,80 @@ public class MyFortressTests {
     }
 
     @Test
-    public void A_testFRDRestart() {
+    public void A_testBlockPD() {
+        myFortressPage.openPage();
+        myFortressPage.pdDoAction("Test", "Disallow");
+        assertEquals("Connected Blocked", myFortressPage.getPDstatus("Test"));
+    }
+
+    @Test
+    public void B_testUnBlockPD() {
+        myFortressPage.openPage();
+        myFortressPage.pdDoAction("Test", "Allow");
+        assertEquals("Connected", myFortressPage.getPDstatus("Test"));
+    }
+
+    @Test
+    public void C_testDeleteAssosiatedFRDWithUser() {
+        associatedUsersPage.openPage();
+        associatedUsersPage.removeUser();
+        dashboardPage.openPage();
+        assertTrue("Assotion page is not loaded", associationPage.isPageOpened());
+
+    }
+
+    @Test
+    public void D_testAssosiateFRDWithUser() {
+        mainPage.openNewTab(TestsConfig.getConfig().getFrdUrl());
+        String code = frdPage.getRegistrationCode();
+        mainPage.switchTab();
+        associationPage.associateFRD(code);
+        assertTrue("FRD is not associated", dashboardPage.isPageOpened());
+    }
+
+    @Test
+    public void E_testSecurityModeChange() {
+        dashboardPage.changeSecurityMode("Low");
+        mainPage.openNewTab(TestsConfig.getConfig().getFrdUrl());
+        String mode = frdPage.getSecurityMode();
+        assertEquals("LOW", mode);
+    }
+
+    @Test
+    public void F_testActivityCountOnDashboard() {
+        String dashActivity = dashboardPage.getActivityCount();
+        mainPage.openNewTab(TestsConfig.getConfig().getFrdUrl());
+        String frdActivity = frdPage.getActivityCount();
+        assertEquals(frdActivity, dashActivity);
+    }
+
+    @Test
+    public void G_testDevicesCountOnDashboard() {
+        String dashDevices = dashboardPage.getDevicesCount();
+        mainPage.openNewTab(TestsConfig.getConfig().getFrdUrl());
+        String frdDevices = frdPage.getDevicesCount();
+        assertEquals(dashDevices, frdDevices);
+    }
+
+    @Test
+    public void H_testChangeFRDname() {
+        myFortressPage.openPage();
+        myFortressPage.editFRDname("Test");
+        mainPage.openNewTab(TestsConfig.getConfig().getFrdUrl());
+        String fbName = frdPage.getFBname();
+        assertEquals("Test", fbName);
+    }
+
+    @Test
+    public void I_testChangePDname() {
+        myFortressPage.openPage();
+        myFortressPage.editPDname("Test", "newTest");
+        mainPage.openNewTab(TestsConfig.getConfig().getFrdUrl());
+        assertTrue("PD is not renamed", frdPage.isPDinTheList("newTest"));
+    }
+
+    @Test
+    public void J_testFRDRestart() {
         myFortressPage.openPage();
         myFortressPage.restartDevice();
         dashboardPage.openPage();
@@ -62,88 +136,11 @@ public class MyFortressTests {
         assertEquals("Online", dashboardPage.getFRDStatus());
     }
 
-    @Test
-    public void B_testBlockPD() {
-        myFortressPage.openPage();
-        myFortressPage.pdDoAction("Test", "Disallow");
-        assertEquals("Connected Blocked", myFortressPage.getPDstatus("Test"));
-    }
-
-    @Test
-    public void C_testUnBlockPD() {
-        myFortressPage.openPage();
-        myFortressPage.pdDoAction("Test", "Allow");
-        assertEquals("Connected", myFortressPage.getPDstatus("Test"));
-    }
-
-    @Test
-    public void D_testDeleteAssosiatedFRDWithUser() {
-        associatedUsersPage.openPage();
-        associatedUsersPage.removeUser();
-        dashboardPage.openPage();
-        assertTrue("Assotion page is not loaded", associationPage.isPageOpened());
-
-    }
-
-    @Test
-    public void E_testAssosiateFRDWithUser() {
-        mainPage.openNewTab(TestsConfig.getConfig().getFrdUrl());
-        String code = frdPage.getRegistrationCode();
-        mainPage.switchTab();
-        associationPage.associateFRD(code);
-        assertTrue("FRD is not associated", dashboardPage.isPageOpened());
-    }
-
     //@Test
     public void F_testUpdateFRDDetails() {
-
-
-    }
-
-
-    @Test
-    public void G_testSecurityModeChange() {
-        dashboardPage.changeSecurityMode("Low");
-        mainPage.openNewTab(TestsConfig.getConfig().getFrdUrl());
-        String mode = frdPage.getSecurityMode();
-        assertEquals("LOW", mode);
-    }
-
-    @Test
-    public void H_testActivityCountOnDashboard() {
-        String dashActivity = dashboardPage.getActivityCount();
-        mainPage.openNewTab(TestsConfig.getConfig().getFrdUrl());
-        String frdActivity = frdPage.getActivityCount();
-        assertEquals(frdActivity, dashActivity);
     }
 
     // @Test
     public void I_testPrioritySet() {
-
-    }
-
-    @Test
-    public void J_testDevicesCountOnDashboard() {
-        String dashDevices = dashboardPage.getDevicesCount();
-        mainPage.openNewTab(TestsConfig.getConfig().getFrdUrl());
-        String frdDevices = frdPage.getDevicesCount();
-        assertEquals(dashDevices, frdDevices);
-    }
-
-    @Test
-    public void K_testChangeFRDname() {
-        myFortressPage.openPage();
-        myFortressPage.editFRDname("Test");
-        mainPage.openNewTab(TestsConfig.getConfig().getFrdUrl());
-        String fbName = frdPage.getFBname();
-        assertEquals("Test", fbName);
-    }
-
-    @Test
-    public void L_testChangePDname() {
-        myFortressPage.openPage();
-        myFortressPage.editPDname("Test", "newTest");
-        mainPage.openNewTab(TestsConfig.getConfig().getFrdUrl());
-        assertTrue("PD is not renamed", frdPage.isPDinTheList("newTest"));
     }
 }

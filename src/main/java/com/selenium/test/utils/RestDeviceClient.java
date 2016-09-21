@@ -3,6 +3,7 @@ package com.selenium.test.utils;
 
 import org.apache.http.client.methods.RequestBuilder;
 import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.client.ClientProperties;
 
 import javax.ws.rs.PUT;
 import javax.ws.rs.client.*;
@@ -45,6 +46,7 @@ public class RestDeviceClient {
     public static void changeStatus(String id, String ip, String action) {
         ClientConfig config = new ClientConfig();
         Client client = ClientBuilder.newClient(config);
+        client.property(ClientProperties.SUPPRESS_HTTP_COMPLIANCE_VALIDATION, true);
 
         WebTarget webTarget = client.target("http://192.168.66.228:8081/api/1.0/devices").path(id)
                 .path(ip)
@@ -54,13 +56,6 @@ public class RestDeviceClient {
 
         Invocation.Builder invocationBuilder = webTarget.request();
         Response response = invocationBuilder.put(Entity.entity(input, MediaType.APPLICATION_JSON), Response.class);
-
-        /*Response response1 = client.target("http://192.168.66.228:8081")
-                .path("api/1.0/devices")
-                .path(id)
-                .path(ip)
-                .path(action)
-                .request().method("PUT");*/
 
     }
 }
