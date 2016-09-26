@@ -1,6 +1,7 @@
 package com.selenium.test.utils;
 
 
+import com.selenium.test.configuration.TestsConfig;
 import org.apache.http.client.methods.RequestBuilder;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.ClientProperties;
@@ -24,7 +25,7 @@ public class RestDeviceClient {
     public static String addPD() {
         ClientConfig config = new ClientConfig();
         Client client = ClientBuilder.newClient(config);
-        WebTarget target = client.target("http://192.168.66.228:8081/api/1.0/device");
+        WebTarget target = client.target(TestsConfig.getConfig().getFrdUrl() + "/api/1.0/device");
 
         String input = "{\"mac\" : \"30:85:A9:B3:36:F4\",\"active\" : true,\"ip\" : \"192.168.66.111\", \"name\" : \"Test\",\"mac_vendor\" : \"Cisco\"}";
 
@@ -48,7 +49,7 @@ public class RestDeviceClient {
         Client client = ClientBuilder.newClient(config);
         client.property(ClientProperties.SUPPRESS_HTTP_COMPLIANCE_VALIDATION, true);
 
-        WebTarget webTarget = client.target("http://192.168.66.228:8081/api/1.0/devices").path(id)
+        WebTarget webTarget = client.target(TestsConfig.getConfig().getFrdUrl() + "/api/1.0/devices").path(id)
                 .path(ip)
                 .path(action);
 
